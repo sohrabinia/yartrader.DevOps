@@ -1,0 +1,20 @@
+platform:
+  name: TradeYar AI
+  type: Financial Intelligence Platform
+
+components:
+
+  pythonServices:
+    enabled: true
+
+  mt5:
+    enabled: true
+
+  sqlServer:
+    enabled: false
+
+  redis:
+    enabled: false
+
+  iis:
+    enabled: false

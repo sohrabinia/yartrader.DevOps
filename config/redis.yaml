@@ -1,0 +1,4 @@
+redis:
+  enabled: false
+  connectionString: "tradeyar-prod-redis:6379"
+  optional: true

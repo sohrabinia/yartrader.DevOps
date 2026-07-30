@@ -1,0 +1,4 @@
+platform:
+  name: "TradeYar AI"
+  type: "Financial Intelligence Platform"
+  environment: "Production"

@@ -1,0 +1,8 @@
+services:
+  pythonServices:
+    enabled: true
+    url: "http://tradeyar-prod-ai:8000"
+  mt5Service:
+    enabled: true
+    host: "tradeyar-prod-mt5"
+    port: 5001

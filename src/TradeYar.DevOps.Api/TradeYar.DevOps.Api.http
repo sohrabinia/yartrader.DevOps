@@ -1,0 +1,6 @@
+@TradeYar.DevOps.Api_HostAddress = http://localhost:5271
+
+GET {{TradeYar.DevOps.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
