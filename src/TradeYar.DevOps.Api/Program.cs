@@ -49,7 +49,13 @@ namespace TradeYar.DevOps.Api
 
             var loader = new ConfigurationLoader();
             var devOpsConfig = loader.LoadConfiguration(configDir, profileDir);
-            builder.Services.AddSingleton(devOpsConfig);
+
+            // Safe startup diagnostics logging
+            Console.WriteLine("[AUDIT] Configuration loaded");
+            Console.WriteLine($"PythonService URL: {devOpsConfig?.Services?.PythonServices?.Url ?? string.Empty}");
+            Console.WriteLine($"PythonService Enabled: {(devOpsConfig?.Services?.PythonServices?.Enabled ?? false).ToString().ToLower()}");
+
+            builder.Services.AddSingleton(devOpsConfig!);
 
             // Core Abstractions
             builder.Services.AddSingleton<IEventBus, InMemoryEventBus>();
