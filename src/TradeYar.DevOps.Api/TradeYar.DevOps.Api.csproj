@@ -17,4 +17,15 @@
     <ProjectReference Include="..\TradeYar.DevOps.Core\TradeYar.DevOps.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\..\config\**\*.yaml">
+      <Link>config\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\profiles\**\*.yaml">
+      <Link>profiles\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
