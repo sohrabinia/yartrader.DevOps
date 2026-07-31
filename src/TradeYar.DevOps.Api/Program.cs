@@ -49,7 +49,17 @@ namespace TradeYar.DevOps.Api
 
             var loader = new ConfigurationLoader();
             var devOpsConfig = loader.LoadConfiguration(configDir, profileDir);
-            builder.Services.AddSingleton(devOpsConfig);
+
+            // Safe startup diagnostics logging
+            Console.WriteLine($"[CONFIG] Loading configuration from:\n{configDir}\n");
+            if (File.Exists(Path.Combine(configDir, "services.yaml")))
+            {
+                Console.WriteLine("[CONFIG] services.yaml loaded\n");
+            }
+            Console.WriteLine($"[CONFIG] PythonService URL:\n{devOpsConfig?.Services?.PythonServices?.Url ?? string.Empty}\n");
+            Console.WriteLine($"[CONFIG] MT5 Host:\n{devOpsConfig?.Services?.Mt5Service?.Host ?? string.Empty}");
+
+            builder.Services.AddSingleton(devOpsConfig!);
 
             // Core Abstractions
             builder.Services.AddSingleton<IEventBus, InMemoryEventBus>();

@@ -4,5 +4,5 @@ services:
     url: "http://127.0.0.1:8000"
   mt5Service:
     enabled: true
-    host: "tradeyar-prod-mt5"
+    host: "127.0.0.1"
     port: 5001
