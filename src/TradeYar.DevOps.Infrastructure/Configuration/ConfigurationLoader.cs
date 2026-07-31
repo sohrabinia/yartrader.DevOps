@@ -102,11 +102,18 @@ namespace TradeYar.DevOps.Infrastructure.Configuration
                 if (File.Exists(platformPath))
                 {
                     var content = File.ReadAllText(platformPath);
-                    var dict = _deserializer.Deserialize<Dictionary<string, PlatformConfig>>(content);
-                    if (dict != null)
+                    try
                     {
-                        var key = dict.ContainsKey("platform") ? "platform" : (dict.ContainsKey("Platform") ? "Platform" : null);
-                        if (key != null) config.Platform = dict[key] ?? new PlatformConfig();
+                        var dict = _deserializer.Deserialize<Dictionary<string, PlatformConfig>>(content);
+                        var key = dict != null && (dict.ContainsKey("platform") || dict.ContainsKey("Platform"))
+                            ? (dict.ContainsKey("platform") ? "platform" : "Platform")
+                            : null;
+                        if (key != null && dict != null) config.Platform = dict[key] ?? new PlatformConfig();
+                        else config.Platform = _deserializer.Deserialize<PlatformConfig>(content) ?? new PlatformConfig();
+                    }
+                    catch
+                    {
+                        try { config.Platform = _deserializer.Deserialize<PlatformConfig>(content) ?? new PlatformConfig(); } catch {}
                     }
                 }
 
@@ -114,11 +121,18 @@ namespace TradeYar.DevOps.Infrastructure.Configuration
                 if (File.Exists(databasesPath))
                 {
                     var content = File.ReadAllText(databasesPath);
-                    var dict = _deserializer.Deserialize<Dictionary<string, DatabasesConfig>>(content);
-                    if (dict != null)
+                    try
                     {
-                        var key = dict.ContainsKey("databases") ? "databases" : (dict.ContainsKey("Databases") ? "Databases" : null);
-                        if (key != null) config.Databases = dict[key] ?? new DatabasesConfig();
+                        var dict = _deserializer.Deserialize<Dictionary<string, DatabasesConfig>>(content);
+                        var key = dict != null && (dict.ContainsKey("databases") || dict.ContainsKey("Databases"))
+                            ? (dict.ContainsKey("databases") ? "databases" : "Databases")
+                            : null;
+                        if (key != null && dict != null) config.Databases = dict[key] ?? new DatabasesConfig();
+                        else config.Databases = _deserializer.Deserialize<DatabasesConfig>(content) ?? new DatabasesConfig();
+                    }
+                    catch
+                    {
+                        try { config.Databases = _deserializer.Deserialize<DatabasesConfig>(content) ?? new DatabasesConfig(); } catch {}
                     }
                 }
 
@@ -126,11 +140,18 @@ namespace TradeYar.DevOps.Infrastructure.Configuration
                 if (File.Exists(redisPath))
                 {
                     var content = File.ReadAllText(redisPath);
-                    var dict = _deserializer.Deserialize<Dictionary<string, RedisConfig>>(content);
-                    if (dict != null)
+                    try
                     {
-                        var key = dict.ContainsKey("redis") ? "redis" : (dict.ContainsKey("Redis") ? "Redis" : null);
-                        if (key != null) config.Redis = dict[key] ?? new RedisConfig();
+                        var dict = _deserializer.Deserialize<Dictionary<string, RedisConfig>>(content);
+                        var key = dict != null && (dict.ContainsKey("redis") || dict.ContainsKey("Redis"))
+                            ? (dict.ContainsKey("redis") ? "redis" : "Redis")
+                            : null;
+                        if (key != null && dict != null) config.Redis = dict[key] ?? new RedisConfig();
+                        else config.Redis = _deserializer.Deserialize<RedisConfig>(content) ?? new RedisConfig();
+                    }
+                    catch
+                    {
+                        try { config.Redis = _deserializer.Deserialize<RedisConfig>(content) ?? new RedisConfig(); } catch {}
                     }
                 }
 
@@ -138,11 +159,18 @@ namespace TradeYar.DevOps.Infrastructure.Configuration
                 if (File.Exists(servicesPath))
                 {
                     var content = File.ReadAllText(servicesPath);
-                    var dict = _deserializer.Deserialize<Dictionary<string, ServicesConfig>>(content);
-                    if (dict != null)
+                    try
                     {
-                        var key = dict.ContainsKey("services") ? "services" : (dict.ContainsKey("Services") ? "Services" : null);
-                        if (key != null) config.Services = dict[key] ?? new ServicesConfig();
+                        var dict = _deserializer.Deserialize<Dictionary<string, ServicesConfig>>(content);
+                        var key = dict != null && (dict.ContainsKey("services") || dict.ContainsKey("Services"))
+                            ? (dict.ContainsKey("services") ? "services" : "Services")
+                            : null;
+                        if (key != null && dict != null) config.Services = dict[key] ?? new ServicesConfig();
+                        else config.Services = _deserializer.Deserialize<ServicesConfig>(content) ?? new ServicesConfig();
+                    }
+                    catch
+                    {
+                        try { config.Services = _deserializer.Deserialize<ServicesConfig>(content) ?? new ServicesConfig(); } catch {}
                     }
                 }
 
@@ -150,11 +178,18 @@ namespace TradeYar.DevOps.Infrastructure.Configuration
                 if (File.Exists(monitoringPath))
                 {
                     var content = File.ReadAllText(monitoringPath);
-                    var dict = _deserializer.Deserialize<Dictionary<string, MonitoringConfig>>(content);
-                    if (dict != null)
+                    try
                     {
-                        var key = dict.ContainsKey("monitoring") ? "monitoring" : (dict.ContainsKey("Monitoring") ? "Monitoring" : null);
-                        if (key != null) config.Monitoring = dict[key] ?? new MonitoringConfig();
+                        var dict = _deserializer.Deserialize<Dictionary<string, MonitoringConfig>>(content);
+                        var key = dict != null && (dict.ContainsKey("monitoring") || dict.ContainsKey("Monitoring"))
+                            ? (dict.ContainsKey("monitoring") ? "monitoring" : "Monitoring")
+                            : null;
+                        if (key != null && dict != null) config.Monitoring = dict[key] ?? new MonitoringConfig();
+                        else config.Monitoring = _deserializer.Deserialize<MonitoringConfig>(content) ?? new MonitoringConfig();
+                    }
+                    catch
+                    {
+                        try { config.Monitoring = _deserializer.Deserialize<MonitoringConfig>(content) ?? new MonitoringConfig(); } catch {}
                     }
                 }
 
