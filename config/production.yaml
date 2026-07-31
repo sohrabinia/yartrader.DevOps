@@ -1,0 +1,6 @@
+runtime:
+  runtime_url: http://localhost:8000/health
+  health_timeout: 10
+  retry_count: 3
+  critical_threshold: 3
+  recovery_enabled: true

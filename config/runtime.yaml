@@ -1,0 +1,6 @@
+runtime:
+  host: localhost
+  port: 8000
+  health_endpoint: /health
+  timeout: 10
+  retry_count: 3
