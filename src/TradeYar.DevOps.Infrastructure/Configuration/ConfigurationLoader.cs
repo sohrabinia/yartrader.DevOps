@@ -102,35 +102,60 @@ namespace TradeYar.DevOps.Infrastructure.Configuration
                 if (File.Exists(platformPath))
                 {
                     var content = File.ReadAllText(platformPath);
-                    config.Platform = _deserializer.Deserialize<PlatformConfig>(content) ?? new PlatformConfig();
+                    var dict = _deserializer.Deserialize<Dictionary<string, PlatformConfig>>(content);
+                    if (dict != null)
+                    {
+                        var key = dict.ContainsKey("platform") ? "platform" : (dict.ContainsKey("Platform") ? "Platform" : null);
+                        if (key != null) config.Platform = dict[key] ?? new PlatformConfig();
+                    }
                 }
 
                 var databasesPath = Path.Combine(configDir, "databases.yaml");
                 if (File.Exists(databasesPath))
                 {
                     var content = File.ReadAllText(databasesPath);
-                    config.Databases = _deserializer.Deserialize<DatabasesConfig>(content) ?? new DatabasesConfig();
+                    var dict = _deserializer.Deserialize<Dictionary<string, DatabasesConfig>>(content);
+                    if (dict != null)
+                    {
+                        var key = dict.ContainsKey("databases") ? "databases" : (dict.ContainsKey("Databases") ? "Databases" : null);
+                        if (key != null) config.Databases = dict[key] ?? new DatabasesConfig();
+                    }
                 }
 
                 var redisPath = Path.Combine(configDir, "redis.yaml");
                 if (File.Exists(redisPath))
                 {
                     var content = File.ReadAllText(redisPath);
-                    config.Redis = _deserializer.Deserialize<RedisConfig>(content) ?? new RedisConfig();
+                    var dict = _deserializer.Deserialize<Dictionary<string, RedisConfig>>(content);
+                    if (dict != null)
+                    {
+                        var key = dict.ContainsKey("redis") ? "redis" : (dict.ContainsKey("Redis") ? "Redis" : null);
+                        if (key != null) config.Redis = dict[key] ?? new RedisConfig();
+                    }
                 }
 
                 var servicesPath = Path.Combine(configDir, "services.yaml");
                 if (File.Exists(servicesPath))
                 {
                     var content = File.ReadAllText(servicesPath);
-                    config.Services = _deserializer.Deserialize<ServicesConfig>(content) ?? new ServicesConfig();
+                    var dict = _deserializer.Deserialize<Dictionary<string, ServicesConfig>>(content);
+                    if (dict != null)
+                    {
+                        var key = dict.ContainsKey("services") ? "services" : (dict.ContainsKey("Services") ? "Services" : null);
+                        if (key != null) config.Services = dict[key] ?? new ServicesConfig();
+                    }
                 }
 
                 var monitoringPath = Path.Combine(configDir, "monitoring.yaml");
                 if (File.Exists(monitoringPath))
                 {
                     var content = File.ReadAllText(monitoringPath);
-                    config.Monitoring = _deserializer.Deserialize<MonitoringConfig>(content) ?? new MonitoringConfig();
+                    var dict = _deserializer.Deserialize<Dictionary<string, MonitoringConfig>>(content);
+                    if (dict != null)
+                    {
+                        var key = dict.ContainsKey("monitoring") ? "monitoring" : (dict.ContainsKey("Monitoring") ? "Monitoring" : null);
+                        if (key != null) config.Monitoring = dict[key] ?? new MonitoringConfig();
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(profileDir))
