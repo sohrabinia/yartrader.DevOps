@@ -51,13 +51,12 @@ namespace TradeYar.DevOps.Api
             var devOpsConfig = loader.LoadConfiguration(configDir, profileDir);
 
             // Safe startup diagnostics logging
-            Console.WriteLine($"[CONFIG] Loading configuration from:\n{configDir}\n");
-            if (File.Exists(Path.Combine(configDir, "services.yaml")))
-            {
-                Console.WriteLine("[CONFIG] services.yaml loaded\n");
-            }
-            Console.WriteLine($"[CONFIG] PythonService URL:\n{devOpsConfig?.Services?.PythonServices?.Url ?? string.Empty}\n");
-            Console.WriteLine($"[CONFIG] MT5 Host:\n{devOpsConfig?.Services?.Mt5Service?.Host ?? string.Empty}");
+            Console.WriteLine("[CONFIG DEBUG]\n");
+            Console.WriteLine($"Services Loaded:\n{(devOpsConfig?.Services != null ? "true" : "false")}\n");
+            Console.WriteLine($"Python Enabled:\n{(devOpsConfig?.Services?.PythonServices != null ? "true" : "false")}\n");
+            Console.WriteLine($"Python URL:\n{devOpsConfig?.Services?.PythonServices?.Url ?? string.Empty}\n");
+            Console.WriteLine($"MT5 Host:\n{devOpsConfig?.Services?.Mt5Service?.Host ?? string.Empty}\n");
+            Console.WriteLine($"MT5 Port:\n{devOpsConfig?.Services?.Mt5Service?.Port ?? 5001}");
 
             builder.Services.AddSingleton(devOpsConfig!);
 
