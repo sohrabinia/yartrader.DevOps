@@ -34,6 +34,8 @@ namespace TradeYar.DevOps.Infrastructure.Collectors
                 }
 
                 string url = _config?.Services?.PythonServices?.Url ?? "";
+                Console.WriteLine($"[COLLECTOR DEBUG] PythonServices exists: {(_config?.Services?.PythonServices != null).ToString().ToLower()}");
+                Console.WriteLine($"[COLLECTOR DEBUG] Python URL value: '{url}'");
                 if (string.IsNullOrEmpty(url))
                 {
                     return new CollectorResult
