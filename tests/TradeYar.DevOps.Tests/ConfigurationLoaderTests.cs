@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Xunit;
+using Microsoft.Extensions.DependencyInjection;
 using TradeYar.DevOps.Infrastructure.Configuration;
 
 namespace TradeYar.DevOps.Tests
@@ -79,6 +80,33 @@ mt5Service:
                     Directory.Delete(tempDir, true);
                 }
             }
+        }
+
+        [Fact]
+        public void DependencyInjection_ResolvesPythonServiceCollectorWithCorrectConfiguration()
+        {
+            // Arrange
+            var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
+
+            var loader = new ConfigurationLoader();
+            var baseDir = AppContext.BaseDirectory;
+            var configDir = Path.Combine(baseDir, "config");
+            var profileDir = Path.Combine(baseDir, "profiles");
+            var config = loader.LoadConfiguration(configDir, profileDir);
+
+            services.AddSingleton(config);
+            services.AddSingleton<TradeYar.DevOps.Infrastructure.Collectors.ICollector, TradeYar.DevOps.Infrastructure.Collectors.PythonServiceCollector>();
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            // Act
+            var collector = serviceProvider.GetRequiredService<TradeYar.DevOps.Infrastructure.Collectors.ICollector>() as TradeYar.DevOps.Infrastructure.Collectors.PythonServiceCollector;
+
+            // Assert
+            Assert.NotNull(collector);
+            var result = collector.Collect();
+            Assert.NotNull(result);
+            Assert.True(result.Availability == "Enabled" || result.Availability == "Disabled");
         }
     }
 }

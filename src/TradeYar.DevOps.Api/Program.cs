@@ -51,12 +51,12 @@ namespace TradeYar.DevOps.Api
             var devOpsConfig = loader.LoadConfiguration(configDir, profileDir);
 
             // Safe startup diagnostics logging
-            Console.WriteLine("[CONFIG DEBUG]\n");
-            Console.WriteLine($"Services Loaded:\n{(devOpsConfig?.Services != null ? "true" : "false")}\n");
-            Console.WriteLine($"Python Enabled:\n{(devOpsConfig?.Services?.PythonServices != null ? "true" : "false")}\n");
-            Console.WriteLine($"Python URL:\n{devOpsConfig?.Services?.PythonServices?.Url ?? string.Empty}\n");
-            Console.WriteLine($"MT5 Host:\n{devOpsConfig?.Services?.Mt5Service?.Host ?? string.Empty}\n");
-            Console.WriteLine($"MT5 Port:\n{devOpsConfig?.Services?.Mt5Service?.Port ?? 5001}");
+            Console.WriteLine("[CONFIG INSTANCE]");
+            Console.WriteLine($"Hash: {devOpsConfig!.GetHashCode()}");
+            Console.WriteLine($"Services Exists: {(devOpsConfig?.Services != null).ToString().ToLower()}");
+            Console.WriteLine($"PythonServices Exists: {(devOpsConfig?.Services?.PythonServices != null).ToString().ToLower()}");
+            Console.WriteLine($"Python URL: {devOpsConfig?.Services?.PythonServices?.Url ?? string.Empty}");
+            Console.WriteLine($"Python Enabled: {(devOpsConfig?.Services?.PythonServices?.Enabled ?? false).ToString().ToLower()}\n");
 
             builder.Services.AddSingleton(devOpsConfig!);
 

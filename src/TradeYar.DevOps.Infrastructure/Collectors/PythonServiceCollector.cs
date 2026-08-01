@@ -14,12 +14,26 @@ namespace TradeYar.DevOps.Infrastructure.Collectors
         {
             _config = config;
             _serviceChecker = serviceChecker;
+
+            Console.WriteLine("[PYTHON COLLECTOR CONFIG]");
+            Console.WriteLine($"Hash: {config?.GetHashCode() ?? 0}");
+            Console.WriteLine($"Services Exists: {(config?.Services != null).ToString().ToLower()}");
+            Console.WriteLine($"PythonServices Exists: {(config?.Services?.PythonServices != null).ToString().ToLower()}");
+            Console.WriteLine($"URL: {config?.Services?.PythonServices?.Url ?? string.Empty}");
+            Console.WriteLine($"Enabled: {(config?.Services?.PythonServices?.Enabled ?? false).ToString().ToLower()}\n");
         }
 
         public CollectorResult Collect()
         {
             try
             {
+                Console.WriteLine("[PYTHON RUNTIME CONFIG]");
+                Console.WriteLine($"Object Type: {_config?.GetType().FullName ?? "null"}");
+                Console.WriteLine($"Object Hash: {_config?.GetHashCode() ?? 0}");
+                Console.WriteLine($"PythonServices Null: {(_config?.Services?.PythonServices == null).ToString().ToLower()}");
+                Console.WriteLine($"URL: {_config?.Services?.PythonServices?.Url ?? string.Empty}");
+                Console.WriteLine($"Enabled: {(_config?.Services?.PythonServices?.Enabled ?? false).ToString().ToLower()}\n");
+
                 bool isEnabled = _config?.Services?.PythonServices?.Enabled ?? true;
 
                 if (!isEnabled)
@@ -34,6 +48,8 @@ namespace TradeYar.DevOps.Infrastructure.Collectors
                 }
 
                 string url = _config?.Services?.PythonServices?.Url ?? "";
+                Console.WriteLine($"[COLLECTOR DEBUG] PythonServices exists: {(_config?.Services?.PythonServices != null).ToString().ToLower()}");
+                Console.WriteLine($"[COLLECTOR DEBUG] Python URL value: '{url}'");
                 if (string.IsNullOrEmpty(url))
                 {
                     return new CollectorResult
