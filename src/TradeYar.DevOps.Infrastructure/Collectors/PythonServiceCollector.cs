@@ -27,6 +27,13 @@ namespace TradeYar.DevOps.Infrastructure.Collectors
         {
             try
             {
+                Console.WriteLine("[PYTHON RUNTIME CONFIG]");
+                Console.WriteLine($"Object Type: {_config?.GetType().FullName ?? "null"}");
+                Console.WriteLine($"Object Hash: {_config?.GetHashCode() ?? 0}");
+                Console.WriteLine($"PythonServices Null: {(_config?.Services?.PythonServices == null).ToString().ToLower()}");
+                Console.WriteLine($"URL: {_config?.Services?.PythonServices?.Url ?? string.Empty}");
+                Console.WriteLine($"Enabled: {(_config?.Services?.PythonServices?.Enabled ?? false).ToString().ToLower()}\n");
+
                 bool isEnabled = _config?.Services?.PythonServices?.Enabled ?? true;
 
                 if (!isEnabled)
