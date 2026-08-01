@@ -14,6 +14,13 @@ namespace TradeYar.DevOps.Infrastructure.Collectors
         {
             _config = config;
             _serviceChecker = serviceChecker;
+
+            Console.WriteLine("[PYTHON COLLECTOR CONFIG]");
+            Console.WriteLine($"Hash: {config?.GetHashCode() ?? 0}");
+            Console.WriteLine($"Services Exists: {(config?.Services != null).ToString().ToLower()}");
+            Console.WriteLine($"PythonServices Exists: {(config?.Services?.PythonServices != null).ToString().ToLower()}");
+            Console.WriteLine($"URL: {config?.Services?.PythonServices?.Url ?? string.Empty}");
+            Console.WriteLine($"Enabled: {(config?.Services?.PythonServices?.Enabled ?? false).ToString().ToLower()}\n");
         }
 
         public CollectorResult Collect()
