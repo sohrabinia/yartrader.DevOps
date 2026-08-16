@@ -1,0 +1,6 @@
+@YarTrader.DevOps.Api_HostAddress = http://localhost:5271
+
+GET {{YarTrader.DevOps.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

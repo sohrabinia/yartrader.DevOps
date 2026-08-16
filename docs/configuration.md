@@ -1,6 +1,6 @@
-# TradeYar.DevOps Configuration Guide
+# YarTrader.DevOps Configuration Guide
 
-The `TradeYar.DevOps` configuration engine uses simple, clean YAML files designed to support dynamic, multi-profile overrides.
+The `YarTrader.DevOps` configuration engine uses simple, clean YAML files designed to support dynamic, multi-profile overrides.
 
 ## Configuration Structure
 
@@ -18,7 +18,7 @@ config/
  └── monitoring.yaml
 
 profiles/
- └── tradeyar-production.yaml
+ └── YarTrader-production.yaml
 ```
 
 ---
@@ -29,7 +29,7 @@ profiles/
 Defines default identity.
 ```yaml
 platform:
-  name: "TradeYar AI"
+  name: "YarTrader AI"
   type: "Financial Intelligence Platform"
   environment: "Production"
 ```
@@ -40,10 +40,10 @@ Maintains connection parameters.
 databases:
   mainDatabase:
     enabled: true
-    connectionString: "Server=tradeyar-prod-sql;Database=TradeYarDb;Trusted_Connection=True;"
+    connectionString: "Server=YarTrader-prod-sql;Database=YarTraderDb;Trusted_Connection=True;"
   archiveDatabase:
     enabled: true
-    connectionString: "Server=tradeyar-prod-sql;Database=TradeYarArchiveDb;Trusted_Connection=True;"
+    connectionString: "Server=YarTrader-prod-sql;Database=YarTraderArchiveDb;Trusted_Connection=True;"
 ```
 
 ### 3. Redis Telemetry (`config/redis.yaml`)
@@ -51,7 +51,7 @@ Handles cache state tracking.
 ```yaml
 redis:
   enabled: false
-  connectionString: "tradeyar-prod-redis:6379"
+  connectionString: "YarTrader-prod-redis:6379"
   optional: true
 ```
 
@@ -61,10 +61,10 @@ Configures microservice URLs for Python AI agents and MT5 proxies.
 services:
   pythonServices:
     enabled: true
-    url: "http://tradeyar-prod-ai:8000"
+    url: "http://YarTrader-prod-ai:8000"
   mt5Service:
     enabled: true
-    host: "tradeyar-prod-mt5"
+    host: "YarTrader-prod-mt5"
     port: 5001
 ```
 
@@ -74,18 +74,18 @@ Adjusts engine intervals and webhook targets.
 monitoring:
   intervalSeconds: 30
   logLevel: "Information"
-  alertWebhook: "https://alerts.tradeyar.dev/webhook"
+  alertWebhook: "https://alerts.YarTrader.dev/webhook"
 ```
 
 ---
 
-## Active Profiles (`profiles/tradeyar-production.yaml`)
+## Active Profiles (`profiles/YarTrader-production.yaml`)
 
 This profile overrides base configs for production deployments.
 
 ```yaml
 platform:
-  name: TradeYar AI
+  name: YarTrader AI
   type: Financial Intelligence Platform
 
 components:

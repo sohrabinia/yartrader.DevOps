@@ -1,6 +1,6 @@
-# Release Notes - TradeYar.DevOps v1.0.0
+# Release Notes - YarTrader.DevOps v1.0.0
 
-The initial release of **TradeYar.DevOps**, a highly resilient, production-ready DevOps and Infrastructure monitoring platform built entirely from scratch for the TradeYar AI Financial Intelligence Platform.
+The initial release of **YarTrader.DevOps**, a highly resilient, production-ready DevOps and Infrastructure monitoring platform built entirely from scratch for the YarTrader AI Financial Intelligence Platform.
 
 This platform completely decouples the telemetry from legacy AmlakBashi business dependencies and establishes a production-grade telemetry pipeline.
 
@@ -9,16 +9,16 @@ This platform completely decouples the telemetry from legacy AmlakBashi business
 ## Architectural Highlights
 
 - **5-Project Architecture**: Built on clean, decoupled .NET 8 projects:
-  - `TradeYar.DevOps.Api`: API controller layer, Windows Service entry, and Swagger interface.
-  - `TradeYar.DevOps.Infrastructure`: Production-hardened hardware & service collectors.
-  - `TradeYar.DevOps.Core`: Extensible abstractions for Health Engine, Modules, Event Bus, and Auditing.
-  - `TradeYar.DevOps.Shared`: Universal utilities (e.g., ISO timestamp generation).
-  - `TradeYar.DevOps.Tests`: High-coverage unit, integration, and resiliency tests.
-- **Fail-Safe Config Loader**: Powered by `YamlDotNet`, merging environment and component profile configurations (`platform.yaml`, `databases.yaml`, `redis.yaml`, `services.yaml`, `monitoring.yaml`, `profiles/tradeyar-production.yaml`) with zero crash risks.
+  - `YarTrader.DevOps.Api`: API controller layer, Windows Service entry, and Swagger interface.
+  - `YarTrader.DevOps.Infrastructure`: Production-hardened hardware & service collectors.
+  - `YarTrader.DevOps.Core`: Extensible abstractions for Health Engine, Modules, Event Bus, and Auditing.
+  - `YarTrader.DevOps.Shared`: Universal utilities (e.g., ISO timestamp generation).
+  - `YarTrader.DevOps.Tests`: High-coverage unit, integration, and resiliency tests.
+- **Fail-Safe Config Loader**: Powered by `YamlDotNet`, merging environment and component profile configurations (`platform.yaml`, `databases.yaml`, `redis.yaml`, `services.yaml`, `monitoring.yaml`, `profiles/YarTrader-production.yaml`) with zero crash risks.
 - **Production-Hardened Telemetry**: Built-in try-catch boundary isolation, timeout simulation, and dependency safety. Missing optional integrations (IIS, SqlServer, Redis) report gracefully and never crash the host process.
 - **AI-Telemetry Placeholder Expansion**: Fully structured implementation entry points for `MT5Collector`, `PythonAICollector`, `FastAPICollector`, and `ModelHealthCollector` returning `NotImplemented` status and `Pending` availability.
 - **Dynamic overall health state engine**: Evaluating overall server health state into `Healthy`, `Degraded`, or `Unhealthy` on-demand based on critical component requirements.
-- **Windows Service Host Option**: Full `UseWindowsService()` configuration permitting daemon deployment as a native Windows service named `TradeYar-DevOps`.
+- **Windows Service Host Option**: Full `UseWindowsService()` configuration permitting daemon deployment as a native Windows service named `YarTrader-DevOps`.
 
 ---
 

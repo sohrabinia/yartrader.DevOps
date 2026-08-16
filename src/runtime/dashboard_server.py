@@ -118,7 +118,7 @@ class DashboardHandler(http.server.BaseHTTPRequestHandler):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TradeYar AI — Operations Dashboard</title>
+    <title>YarTrader AI — Operations Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -134,7 +134,7 @@ class DashboardHandler(http.server.BaseHTTPRequestHandler):
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <span class="text-xl font-bold tracking-tight text-white flex items-center">
-                        <span class="bg-indigo-600 text-white px-2 py-0.5 rounded mr-2 text-sm font-black">TradeYar</span>
+                        <span class="bg-indigo-600 text-white px-2 py-0.5 rounded mr-2 text-sm font-black">YarTrader</span>
                         Runtime Operations Dashboard
                     </span>
                 </div>
@@ -284,7 +284,7 @@ class DashboardHandler(http.server.BaseHTTPRequestHandler):
 
     <!-- Footer -->
     <footer class="border-t border-gray-800 py-6 bg-gray-950/40 text-center">
-        <p class="text-xs text-gray-500">TradeYar.DevOps AI Runtime Operations Platform — Phase 1</p>
+        <p class="text-xs text-gray-500">YarTrader.DevOps AI Runtime Operations Platform — Phase 1</p>
     </footer>
 </body>
 </html>

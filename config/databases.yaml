@@ -1,7 +1,7 @@
 databases:
   mainDatabase:
     enabled: true
-    connectionString: "Server=tradeyar-prod-sql;Database=TradeYarDb;Trusted_Connection=True;"
+    connectionString: "Server=YarTrader-prod-sql;Database=YarTraderDb;Trusted_Connection=True;"
   archiveDatabase:
     enabled: true
-    connectionString: "Server=tradeyar-prod-sql;Database=TradeYarArchiveDb;Trusted_Connection=True;"
+    connectionString: "Server=YarTrader-prod-sql;Database=YarTraderArchiveDb;Trusted_Connection=True;"
