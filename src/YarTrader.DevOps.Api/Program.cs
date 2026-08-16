@@ -49,7 +49,16 @@ namespace YarTrader.DevOps.Api
 
             var loader = new ConfigurationLoader();
             var devOpsConfig = loader.LoadConfiguration(configDir, profileDir);
-            builder.Services.AddSingleton(devOpsConfig);
+
+            // Safe startup diagnostics logging
+            Console.WriteLine("[CONFIG INSTANCE]");
+            Console.WriteLine($"Hash: {devOpsConfig!.GetHashCode()}");
+            Console.WriteLine($"Services Exists: {(devOpsConfig?.Services != null).ToString().ToLower()}");
+            Console.WriteLine($"PythonServices Exists: {(devOpsConfig?.Services?.PythonServices != null).ToString().ToLower()}");
+            Console.WriteLine($"Python URL: {devOpsConfig?.Services?.PythonServices?.Url ?? string.Empty}");
+            Console.WriteLine($"Python Enabled: {(devOpsConfig?.Services?.PythonServices?.Enabled ?? false).ToString().ToLower()}\n");
+
+            builder.Services.AddSingleton(devOpsConfig!);
 
             // Core Abstractions
             builder.Services.AddSingleton<IEventBus, InMemoryEventBus>();

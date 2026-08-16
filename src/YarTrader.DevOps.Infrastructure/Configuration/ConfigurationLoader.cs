@@ -102,35 +102,95 @@ namespace YarTrader.DevOps.Infrastructure.Configuration
                 if (File.Exists(platformPath))
                 {
                     var content = File.ReadAllText(platformPath);
-                    config.Platform = _deserializer.Deserialize<PlatformConfig>(content) ?? new PlatformConfig();
+                    try
+                    {
+                        var dict = _deserializer.Deserialize<Dictionary<string, PlatformConfig>>(content);
+                        var key = dict != null && (dict.ContainsKey("platform") || dict.ContainsKey("Platform"))
+                            ? (dict.ContainsKey("platform") ? "platform" : "Platform")
+                            : null;
+                        if (key != null && dict != null) config.Platform = dict[key] ?? new PlatformConfig();
+                        else config.Platform = _deserializer.Deserialize<PlatformConfig>(content) ?? new PlatformConfig();
+                    }
+                    catch
+                    {
+                        try { config.Platform = _deserializer.Deserialize<PlatformConfig>(content) ?? new PlatformConfig(); } catch {}
+                    }
                 }
 
                 var databasesPath = Path.Combine(configDir, "databases.yaml");
                 if (File.Exists(databasesPath))
                 {
                     var content = File.ReadAllText(databasesPath);
-                    config.Databases = _deserializer.Deserialize<DatabasesConfig>(content) ?? new DatabasesConfig();
+                    try
+                    {
+                        var dict = _deserializer.Deserialize<Dictionary<string, DatabasesConfig>>(content);
+                        var key = dict != null && (dict.ContainsKey("databases") || dict.ContainsKey("Databases"))
+                            ? (dict.ContainsKey("databases") ? "databases" : "Databases")
+                            : null;
+                        if (key != null && dict != null) config.Databases = dict[key] ?? new DatabasesConfig();
+                        else config.Databases = _deserializer.Deserialize<DatabasesConfig>(content) ?? new DatabasesConfig();
+                    }
+                    catch
+                    {
+                        try { config.Databases = _deserializer.Deserialize<DatabasesConfig>(content) ?? new DatabasesConfig(); } catch {}
+                    }
                 }
 
                 var redisPath = Path.Combine(configDir, "redis.yaml");
                 if (File.Exists(redisPath))
                 {
                     var content = File.ReadAllText(redisPath);
-                    config.Redis = _deserializer.Deserialize<RedisConfig>(content) ?? new RedisConfig();
+                    try
+                    {
+                        var dict = _deserializer.Deserialize<Dictionary<string, RedisConfig>>(content);
+                        var key = dict != null && (dict.ContainsKey("redis") || dict.ContainsKey("Redis"))
+                            ? (dict.ContainsKey("redis") ? "redis" : "Redis")
+                            : null;
+                        if (key != null && dict != null) config.Redis = dict[key] ?? new RedisConfig();
+                        else config.Redis = _deserializer.Deserialize<RedisConfig>(content) ?? new RedisConfig();
+                    }
+                    catch
+                    {
+                        try { config.Redis = _deserializer.Deserialize<RedisConfig>(content) ?? new RedisConfig(); } catch {}
+                    }
                 }
 
                 var servicesPath = Path.Combine(configDir, "services.yaml");
                 if (File.Exists(servicesPath))
                 {
                     var content = File.ReadAllText(servicesPath);
-                    config.Services = _deserializer.Deserialize<ServicesConfig>(content) ?? new ServicesConfig();
+                    try
+                    {
+                        var dict = _deserializer.Deserialize<Dictionary<string, ServicesConfig>>(content);
+                        var key = dict != null && (dict.ContainsKey("services") || dict.ContainsKey("Services"))
+                            ? (dict.ContainsKey("services") ? "services" : "Services")
+                            : null;
+                        if (key != null && dict != null) config.Services = dict[key] ?? new ServicesConfig();
+                        else config.Services = _deserializer.Deserialize<ServicesConfig>(content) ?? new ServicesConfig();
+                    }
+                    catch
+                    {
+                        try { config.Services = _deserializer.Deserialize<ServicesConfig>(content) ?? new ServicesConfig(); } catch {}
+                    }
                 }
 
                 var monitoringPath = Path.Combine(configDir, "monitoring.yaml");
                 if (File.Exists(monitoringPath))
                 {
                     var content = File.ReadAllText(monitoringPath);
-                    config.Monitoring = _deserializer.Deserialize<MonitoringConfig>(content) ?? new MonitoringConfig();
+                    try
+                    {
+                        var dict = _deserializer.Deserialize<Dictionary<string, MonitoringConfig>>(content);
+                        var key = dict != null && (dict.ContainsKey("monitoring") || dict.ContainsKey("Monitoring"))
+                            ? (dict.ContainsKey("monitoring") ? "monitoring" : "Monitoring")
+                            : null;
+                        if (key != null && dict != null) config.Monitoring = dict[key] ?? new MonitoringConfig();
+                        else config.Monitoring = _deserializer.Deserialize<MonitoringConfig>(content) ?? new MonitoringConfig();
+                    }
+                    catch
+                    {
+                        try { config.Monitoring = _deserializer.Deserialize<MonitoringConfig>(content) ?? new MonitoringConfig(); } catch {}
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(profileDir))
