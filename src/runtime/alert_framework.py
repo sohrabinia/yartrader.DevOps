@@ -31,8 +31,8 @@ class EmailAlertProvider(AlertProvider):
     def __init__(self, smtp_server=None, port=None, sender=None, recipient=None):
         self.smtp_server = smtp_server or "smtp.example.com"
         self.port = port or 587
-        self.sender = sender or "devops@tradeyar.com"
-        self.recipient = recipient or "admin@tradeyar.com"
+        self.sender = sender or "devops@yartrader.com"
+        self.recipient = recipient or "admin@yartrader.com"
 
     def send_alert(self, message: str) -> bool:
         # Email alert placeholder

@@ -49,7 +49,7 @@ class MonitoringWorker:
         self._write_json_log(self.runtime_log_dir, "runtime.log", {
             "time": time_str,
             "event": "monitoring_cycle_start",
-            "service": "TradeYar-AI"
+            "service": "YarTrader-AI"
         })
 
         try:
@@ -80,7 +80,7 @@ class MonitoringWorker:
             monitoring_event = {
                 "time": time_str,
                 "event": "health_check",
-                "service": "TradeYar-AI",
+                "service": "YarTrader-AI",
                 "status": service_status,
                 "api": response_data.get("api", "Offline"),
                 "mt5": response_data.get("mt5", "Disconnected"),
@@ -92,10 +92,10 @@ class MonitoringWorker:
 
             # 5. Alerting on status transitions
             if self.last_status is not None and self.last_status != service_status:
-                alert_msg = f"TradeYar AI Service status changed from {self.last_status} to {service_status}. Detail: {error_message}"
+                alert_msg = f"YarTrader AI Service status changed from {self.last_status} to {service_status}. Detail: {error_message}"
                 self.alert_provider.send_alert(alert_msg)
             elif self.last_status is None and service_status != "Healthy":
-                alert_msg = f"TradeYar AI Service is initialized in non-Healthy status: {service_status}. Detail: {error_message}"
+                alert_msg = f"YarTrader AI Service is initialized in non-Healthy status: {service_status}. Detail: {error_message}"
                 self.alert_provider.send_alert(alert_msg)
 
             self.last_status = service_status
@@ -103,14 +103,14 @@ class MonitoringWorker:
             # 6. Check for automatic recovery
             triggered_recovery = self.recovery_manager.record_check(service_status)
             if triggered_recovery:
-                alert_msg = f"TradeYar AI Service reached consecutive failure threshold. Automatic recovery (restart) triggered."
+                alert_msg = f"YarTrader AI Service reached consecutive failure threshold. Automatic recovery (restart) triggered."
                 self.alert_provider.send_alert(alert_msg)
 
             # Log check end
             self._write_json_log(self.runtime_log_dir, "runtime.log", {
                 "time": time_str,
                 "event": "monitoring_cycle_complete",
-                "service": "TradeYar-AI",
+                "service": "YarTrader-AI",
                 "status": service_status
             })
 
@@ -121,7 +121,7 @@ class MonitoringWorker:
             error_event = {
                 "time": err_time,
                 "event": "monitoring_error",
-                "service": "TradeYar-AI",
+                "service": "YarTrader-AI",
                 "error": str(ex),
                 "traceback": traceback.format_exc()
             }
@@ -133,10 +133,10 @@ class MonitoringWorker:
         """
         Starts the monitoring loop.
         """
-        self.alert_provider.send_alert("TradeYar AI Runtime Operations Platform Monitoring Worker started.")
+        self.alert_provider.send_alert("YarTrader AI Runtime Operations Platform Monitoring Worker started.")
         try:
             while True:
                 self.run_once()
                 time.sleep(interval_seconds)
         except KeyboardInterrupt:
-            self.alert_provider.send_alert("TradeYar AI Monitoring Worker stopped by user.")
+            self.alert_provider.send_alert("YarTrader AI Monitoring Worker stopped by user.")

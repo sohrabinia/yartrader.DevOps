@@ -1,12 +1,12 @@
-# TradeYar.DevOps Architecture Overview
+# YarTrader.DevOps Architecture Overview
 
-This document outlines the architectural design and principles of the `TradeYar.DevOps` platform.
+This document outlines the architectural design and principles of the `YarTrader.DevOps` platform.
 
 ## Architecture Diagram
 
 ```
                 +---------------------------------------+
-                |         TradeYar.DevOps.Api           |
+                |         YarTrader.DevOps.Api           |
                 |   - Controller (DevOpsController)     |
                 |   - Windows Service Shell / Swashbuckle |
                 +-------------------+-------------------+
@@ -14,7 +14,7 @@ This document outlines the architectural design and principles of the `TradeYar.
                                     | References
                                     v
                 +---------------------------------------+
-                |    TradeYar.DevOps.Infrastructure     |
+                |    YarTrader.DevOps.Infrastructure     |
                 |   - Configuration Loader (YamlDotNet)  |
                 |   - hardened Telemetry Collectors     |
                 +---------------------------------------+
@@ -22,15 +22,15 @@ This document outlines the architectural design and principles of the `TradeYar.
 
 ## Structural Layers
 
-### 1. Presentation & Host Layer (`TradeYar.DevOps.Api`)
+### 1. Presentation & Host Layer (`YarTrader.DevOps.Api`)
 The endpoint layer exposing system health and telemetry.
 - **`Program.cs`**: Handles bootstrap logic. Instantiates either a standard ASP.NET Core developer webserver or hooks into the Windows Service Control Manager when deployed via `UseWindowsService()`.
 - **`DevOpsController.cs`**: Implements the main dynamic `/api/devops/health` endpoint, collecting status info from all active collectors and returning a dynamic overall status.
 
-### 2. Implementation Layer (`TradeYar.DevOps.Infrastructure`)
+### 2. Implementation Layer (`YarTrader.DevOps.Infrastructure`)
 The processing core of the application, completely decoupled from the Web API pipeline.
 - **`Collectors/`**: Standardizes system interrogation. Each collector evaluates a single dependency (IIS, SqlServer, Redis, Windows System, Python Service) using robust try-catch isolation.
-- **`Configuration/`**: A profile-driven configuration system that merges modular YAML config files (`platform`, `databases`, `redis`, `services`, `monitoring`) with active profile overrides (`tradeyar-production.yaml`).
+- **`Configuration/`**: A profile-driven configuration system that merges modular YAML config files (`platform`, `databases`, `redis`, `services`, `monitoring`) with active profile overrides (`YarTrader-production.yaml`).
 
 ---
 
@@ -45,5 +45,5 @@ The processing core of the application, completely decoupled from the Web API pi
    - No AmlakBashi naming or logic remains in the codebase.
    - The platform resolves paths dynamically to allow config templates to live outside compiled binaries.
 
-3. **TradeYar AI Extensibility**
-   - The solution prepares for expansion by explicitly providing structured placeholders for `MT5Collector`, `PythonAICollector`, `FastAPICollector`, and `ModelHealthCollector` that return `NotImplemented` status and `Pending` availability, making integrating TradeYar ML endpoints trivial.
+3. **YarTrader AI Extensibility**
+   - The solution prepares for expansion by explicitly providing structured placeholders for `MT5Collector`, `PythonAICollector`, `FastAPICollector`, and `ModelHealthCollector` that return `NotImplemented` status and `Pending` availability, making integrating YarTrader ML endpoints trivial.

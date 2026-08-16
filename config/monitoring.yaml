@@ -1,4 +1,4 @@
 monitoring:
   intervalSeconds: 30
   logLevel: "Information"
-  alertWebhook: "https://alerts.tradeyar.dev/webhook"
+  alertWebhook: "https://alerts.yartrader.dev/webhook"

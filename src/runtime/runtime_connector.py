@@ -25,7 +25,7 @@ class RuntimeConnector:
             try:
                 req = urllib.request.Request(
                     url,
-                    headers={'User-Agent': 'TradeYar-DevOps-Connector/1.0', 'Accept': 'application/json'}
+                    headers={'User-Agent': 'YarTrader-DevOps-Connector/1.0', 'Accept': 'application/json'}
                 )
                 start_time = time.perf_counter()
                 with urllib.request.urlopen(req, timeout=timeout) as response:

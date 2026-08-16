@@ -1,6 +1,6 @@
-# TradeYar AI Runtime Operations & Monitoring Platform
+# YarTrader AI Runtime Operations & Monitoring Platform
 
-Welcome to the production runtime monitoring, health evaluation, and automatic recovery platform for **TradeYar AI**. This platform operates alongside the main C# DevOps layer to track the real-time runtime health of TradeYar AI services, log metrics, trigger alert notifications, and autonomously execute service recovery on Windows Server.
+Welcome to the production runtime monitoring, health evaluation, and automatic recovery platform for **YarTrader AI**. This platform operates alongside the main C# DevOps layer to track the real-time runtime health of YarTrader AI services, log metrics, trigger alert notifications, and autonomously execute service recovery on Windows Server.
 
 ---
 
@@ -39,16 +39,16 @@ The platform is designed in Python 3 for high modularity, speed, and zero extern
           |
           v
 +-----------------------+
-|  TradeYar AI Runtime  | (FastAPI, MT5, Workers, Intelligence)
+|  YarTrader AI Runtime  | (FastAPI, MT5, Workers, Intelligence)
 +-----------------------+
 ```
 
 ### Components
 
-1. **RuntimeConnector**: Low-level client using Python's standard library `urllib` to request status from TradeYar AI. Features built-in timeout settings, connection retry count, and strict JSON contract validation.
+1. **RuntimeConnector**: Low-level client using Python's standard library `urllib` to request status from YarTrader AI. Features built-in timeout settings, connection retry count, and strict JSON contract validation.
 2. **HealthEvaluator**: Evaluates raw service responses and latency metrics into one of three operational states: `Healthy`, `Warning`, or `Critical`.
 3. **RuntimeStatusStorage**: Embedded SQLite database layer recording check history, calculating historical uptime, latency averages, and state transition counts.
-4. **RecoveryManager**: Active operations manager that tracks consecutive failed checks. If consecutive failed checks exceed the threshold, it fires `scripts/restart_service.ps1` to restart the TradeYar AI Windows Service, registers the event, and executes immediate post-recovery validation.
+4. **RecoveryManager**: Active operations manager that tracks consecutive failed checks. If consecutive failed checks exceed the threshold, it fires `scripts/restart_service.ps1` to restart the YarTrader AI Windows Service, registers the event, and executes immediate post-recovery validation.
 5. **AlertProvider**: Modular interface dispatching warning and recovery alerts to Console, Telegram, Email, and Webhook interfaces.
 6. **MonitoringWorker**: Core scheduler running the monitoring loop, saving histories, and coordinating tasks.
 7. **DashboardServer**: Ultra-lightweight, high-performance web dashboard displaying live service stats, component breakdowns, latency, and history.
@@ -72,7 +72,7 @@ runtime:
 
 ### Field Reference
 
-* `runtime_url`: The direct target HTTP endpoint URL of the TradeYar AI FastAPI Runtime.
+* `runtime_url`: The direct target HTTP endpoint URL of the YarTrader AI FastAPI Runtime.
 * `health_timeout`: The response timeout limit in seconds.
 * `retry_count`: The number of connection retry attempts on transient network errors.
 * `critical_threshold`: The consecutive number of failed health checks before automatic service recovery restarts are initiated (default: `3`).
@@ -107,7 +107,7 @@ The `HealthEvaluator` categorizes runtime states according to rigorous rules:
 * **Degraded Components**: The API is reachable, but one or more core subsystems (MT5, Worker, Intelligence, Shadow Trading) are offline/stopped.
 
 ### 🔴 Critical
-* **Runtime Offline**: The connector cannot establish a connection to TradeYar AI due to timeout, socket connection error, or HTTP failure after exhausting all `retry_count` attempts.
+* **Runtime Offline**: The connector cannot establish a connection to YarTrader AI due to timeout, socket connection error, or HTTP failure after exhausting all `retry_count` attempts.
 
 ---
 

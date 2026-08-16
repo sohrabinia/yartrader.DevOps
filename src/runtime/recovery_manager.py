@@ -84,8 +84,8 @@ class RecoveryManager:
                         script_output = (
                             "[SIMULATED Unix Fallback]\n"
                             "Powershell not found in Unix environment. Simulating restart...\n"
-                            "Stopping service TradeYar-AI...\n"
-                            "Starting service TradeYar-AI...\n"
+                            "Stopping service YarTrader-AI...\n"
+                            "Starting service YarTrader-AI...\n"
                             "Service restarted successfully."
                         )
                         success = True
@@ -115,7 +115,7 @@ class RecoveryManager:
         recovery_event = {
             "time": time_str,
             "event": "service_recovery",
-            "service": "TradeYar-AI",
+            "service": "YarTrader-AI",
             "status": "Recovered" if success else "Failed",
             "script": self.script_path,
             "output": script_output.strip(),

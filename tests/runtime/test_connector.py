@@ -20,7 +20,7 @@ class TestRuntimeConnector(unittest.TestCase):
         mock_response.status = 200
         mock_json = {
             "status": "Healthy",
-            "service": "TradeYar-AI",
+            "service": "YarTrader-AI",
             "api": "Online",
             "mt5": "Connected",
             "intelligence": "Ready",
@@ -47,7 +47,7 @@ class TestRuntimeConnector(unittest.TestCase):
         mock_response.status = 200
         mock_json = {
             "status": "Healthy",
-            "service": "TradeYar-AI",
+            "service": "YarTrader-AI",
             "api": "Online",
             "timestamp": "2026-07-31T12:00:00Z"
         }

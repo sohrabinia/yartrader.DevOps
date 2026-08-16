@@ -1,4 +1,4 @@
-# .gitignore for .NET TradeYar.DevOps
+# .gitignore for .NET YarTrader.DevOps
 [Bb]in/
 [Oo]bj/
 **/[Bb]in/

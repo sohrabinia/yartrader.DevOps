@@ -1,15 +1,15 @@
-# TradeYar.DevOps
+# YarTrader.DevOps
 
-TradeYar.DevOps is a robust, independent production monitoring and DevOps platform custom-designed for **TradeYar AI**, a high-performance Financial Intelligence Platform. This solution has been engineered from the ground up, completely independent from legacy dependencies, to provide production-hardened infrastructure tracking, service telemetry, and MT5/AI model health diagnostics.
+YarTrader.DevOps is a robust, independent production monitoring and DevOps platform custom-designed for **YarTrader AI**, a high-performance Financial Intelligence Platform. This solution has been engineered from the ground up, completely independent from legacy dependencies, to provide production-hardened infrastructure tracking, service telemetry, and MT5/AI model health diagnostics.
 
 ## Features
 
-- **Decoupled Architecture**: Fully separated API (`TradeYar.DevOps.Api`) and Core/Telemetry engine (`TradeYar.DevOps.Infrastructure`).
+- **Decoupled Architecture**: Fully separated API (`YarTrader.DevOps.Api`) and Core/Telemetry engine (`YarTrader.DevOps.Infrastructure`).
 - **Resilient Configuration**: Profile-based environment loading (`config/` and `profiles/`) supporting fail-safe parameters, graceful syntax error fallbacks, and multi-profile setups.
 - **Production-Hardened Collectors**: Monitors IIS, SQL Server, Redis, and Windows Systems. Designed so that non-critical, missing, or optional dependencies do NOT crash the platform or mark it unhealthy unnecessarily.
 - **AI-Monitoring Preparedness**: In-built architecture placeholders for `MT5Collector`, `PythonAICollector`, `FastAPICollector`, and `ModelHealthCollector` returning `NotImplemented` status and `Pending` availability, ready for rapid agent deployment.
 - **Dynamic Health Status Calculation**: The `/api/devops/health` endpoint evaluates state dynamically, distinguishing between non-critical degraded optional modules versus critical component failures.
-- **Windows Service Ready**: Supports running natively as a Windows Service (`TradeYar-DevOps`) with auto-start, crash recovery, graceful shutdown, and local file logging.
+- **Windows Service Ready**: Supports running natively as a Windows Service (`YarTrader-DevOps`) with auto-start, crash recovery, graceful shutdown, and local file logging.
 
 ---
 
@@ -33,7 +33,7 @@ dotnet test
 
 ### Running the API locally
 ```bash
-dotnet run --project src/TradeYar.DevOps.Api
+dotnet run --project src/YarTrader.DevOps.Api
 ```
 Once running, open your browser and navigate to:
 - Swagger UI: `http://localhost:5000/` or `https://localhost:5001/` (at root `/` URL)
